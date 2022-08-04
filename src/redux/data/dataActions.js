@@ -24,20 +24,45 @@ const fetchDataFailed = (payload) => {
 export const fetchData = () => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
+
     try {
+
       let totalSupply = await store
+        .getState().
+        blockchain.smartContract.totalSupply();
+      totalSupply = String(totalSupply)
+      let Owner = await store
         .getState()
-        .blockchain.smartContract.methods.totalSupply()
-        .call();
-      // let cost = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.cost()
-      //   .call();
+        .blockchain.smartContract.owner()
+        ;
+      Owner = String(Owner)
+      let whitelistEnabled = await store
+        .getState()
+        .blockchain.smartContract.whitelistEnabled()
+        ;
+      let paused = await store
+        .getState()
+        .blockchain.smartContract.paused()
+        ;
+      let publicCost = await store
+        .getState()
+        .blockchain.smartContract.publicCost()
+        ;
+      publicCost = String(publicCost)
+      let whitelistCost = await store
+        .getState()
+        .blockchain.smartContract.whitelistCost()
+        ;
+      whitelistCost = String(whitelistCost)
 
       dispatch(
         fetchDataSuccess({
           totalSupply,
-          // cost,
+          whitelistEnabled,
+          paused,
+          publicCost,
+          whitelistCost,
+          Owner
         })
       );
     } catch (err) {
@@ -46,3 +71,6 @@ export const fetchData = () => {
     }
   };
 };
+
+
+

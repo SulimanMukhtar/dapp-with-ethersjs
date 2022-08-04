@@ -1,10 +1,10 @@
 {
-  "CONTRACT_ADDRESS": "0x0b18b900F7375AABDa00EEaC988116C33fb05BD2",
-  "SCAN_LINK": "https://polygonscan.com/token/0x0b18b900F7375AABDa00EEaC988116C33fb05BD2",
+  "CONTRACT_ADDRESS": "0xbf1fd1d92f3e2fd56606cc739fcfe9ce0c1da277",
+  "SCAN_LINK": "https://etherscan.io/token/0xbf1fd1d92f3e2fd56606cc739fcfe9ce0c1da277",
   "NETWORK": {
-    "NAME": "Polygon",
-    "SYMBOL": "Matic",
-    "ID": 137
+    "NAME": "Ethereum",
+    "SYMBOL": "ETH",
+    "ID": 1
   },
   "NFT_NAME": "The Stripes NFT",
   "SYMBOL": "TSNFT",
