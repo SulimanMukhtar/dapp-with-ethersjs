@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
@@ -222,7 +222,6 @@ function App() {
     const getData = () => {
         if (blockchain.account !== "" && blockchain.smartContract !== null) {
             dispatch(fetchData(blockchain.account));
-
         }
     };
 
@@ -258,7 +257,6 @@ function App() {
 
     useEffect(() => {
         getData();
-
     }, [blockchain.account]);
 
     return (
@@ -317,13 +315,13 @@ function App() {
                         >
                             <StyledButton
                                 onClick={(e) => {
-                                    window.open("/config/roadmap.pdf", "_blank");
+                                    window.open("https://discord.com", "_blank");
                                 }}
                                 style={{
                                     margin: "5px",
                                 }}
                             >
-                                Roadmap
+                                Discord
                             </StyledButton>
                             <StyledButton
                                 style={{

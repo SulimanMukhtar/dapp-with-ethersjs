@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { HashRouter as Router } from 'react-router-dom';
 
 import "./styles/reset.css";
+import { HashRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <Router>

@@ -8,7 +8,6 @@ function App() {
   return (
     <div>
       <Routes>
-
         <Route exact path="/" element={<Mint />} />
         <Route exact path="/Manage" element={<Manage />} />
       </Routes>
