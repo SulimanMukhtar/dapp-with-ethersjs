@@ -1,18 +1,13 @@
 {
-  "CONTRACT_ADDRESS": "0xbf1fd1d92f3e2fd56606cc739fcfe9ce0c1da277",
-  "SCAN_LINK": "https://etherscan.io/token/0xbf1fd1d92f3e2fd56606cc739fcfe9ce0c1da277",
+  "CONTRACT_ADDRESS": "",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
     "ID": 1
   },
-  "NFT_NAME": "The Stripes NFT",
-  "SYMBOL": "TSNFT",
-  "MAX_SUPPLY": 992,
-  "WEI_COST": 4000000000000000000,
-  "DISPLAY_COST": 4,
-  "GAS_LIMIT": 285000,
-  "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/the-stripes-nft",
+  "NFT_NAME": "The Badass Bears NFT",
+  "SYMBOL": "Badass",
+  "MARKETPLACE": "Opensea",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/",
   "SHOW_BACKGROUND": true
 }

@@ -75,10 +75,10 @@ export const StyledLogo = styled.img`
   transition: width 0.5s;
   transition: height 0.5s;
 `;
+// box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
+// border: 4px dashed var(--secondary);
 
 export const StyledImg = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  border: 4px dashed var(--secondary);
   background-color: var(--accent);
   border-radius: 100%;
   width: 200px;
@@ -203,6 +203,20 @@ function App() {
     };
 
 
+    const isWhitelisted = () => {
+        console.log("current account" + blockchain.account);
+        const leaf = Whitelisted.map(addr => keccak256(addr));
+        const Merkletree = new MerkleTree(leaf, keccak256, { sortPairs: true });
+
+        const rootHash = Merkletree.getRoot().toString('hex');
+        const adddd = keccak256(blockchain.account);
+
+        const proof = Merkletree.getHexProof(adddd);
+
+        return Merkletree.verify(proof,adddd , rootHash);
+    }
+
+
     const decrementMintAmount = () => {
         let newMintAmount = mintAmount - 1;
         if (newMintAmount < 1) {
@@ -250,7 +264,6 @@ function App() {
     }
 
     useEffect(() => {
-
         getConfig();
         getWhitelistedAddresses();
     }, []);
@@ -271,9 +284,21 @@ function App() {
                     <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
                 </a>
                 <s.SpacerSmall />
+
+                <s.TextDescription
+                            style={{
+                                fontSize: '30px',
+                                textAlign: "center",
+                                color: "var(--primary-text)",
+                            }}
+                        >
+                           Badass Bears
+                        </s.TextDescription> 
+
+                <s.SpacerSmall />
                 <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
                     <s.Container flex={1} jc={"center"} ai={"center"}>
-                        <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+                        <StyledImg alt={"example"} src={"/config/images/1.png"} />
                     </s.Container>
                     <s.SpacerLarge />
                     <s.Container
@@ -281,14 +306,15 @@ function App() {
                         jc={"center"}
                         ai={"center"}
                         style={{
-                            backgroundColor: "var(--accent)",
+                            backgroundColor: '#150d0d' ,
                             padding: 24,
                             borderRadius: 24,
-                            border: "4px dashed var(--secondary)",
+                            // border: "4px dashed var(--secondary)",
                             boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
                         }}
                     >
-                        <s.TextTitle
+
+                        {/* <s.TextTitle
                             style={{
                                 textAlign: "center",
                                 fontSize: 50,
@@ -307,8 +333,8 @@ function App() {
                             <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                                 {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
                             </StyledLink>
-                        </s.TextDescription>
-                        <span
+                        </s.TextDescription> */}
+                        {/* <span
                             style={{
                                 textAlign: "center",
                             }}
@@ -333,7 +359,7 @@ function App() {
                             >
                                 {CONFIG.MARKETPLACE}
                             </StyledButton>
-                        </span>
+                        </span> */}
                         <s.SpacerSmall />
                         {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
                             <>
@@ -354,7 +380,7 @@ function App() {
                             </>
                         ) : (
                             <>
-                                <s.TextTitle
+                                {/* <s.TextTitle
                                     style={{ textAlign: "center", color: "var(--accent-text)" }}
                                 >
                                     1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
@@ -365,7 +391,7 @@ function App() {
                                     style={{ textAlign: "center", color: "var(--accent-text)" }}
                                 >
                                     Excluding gas fees.
-                                </s.TextDescription>
+                                </s.TextDescription> */}
                                 <s.SpacerSmall />
                                 {blockchain.account === "" ||
                                     blockchain.smartContract === null ? (
@@ -404,59 +430,101 @@ function App() {
                                     </s.Container>
                                 ) : (
                                     <>
+                                        {isWhitelisted() == true ? (
+                                            <>
+                                                    {/* <s.TextDescription
+                                                    style={{
+                                                        textAlign: "center",
+                                                        color: "var(--accent-text)",
+                                                    }}
+                                                >
+                                                    {feedback}
+                                                </s.TextDescription>
+                                                <s.SpacerMedium />
+                                                <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                                                    <StyledRoundButton
+                                                        style={{ lineHeight: 0.4 }}
+                                                        disabled={claimingNft ? 1 : 0}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            decrementMintAmount();
+                                                        }}
+                                                    >
+                                                        -
+                                                    </StyledRoundButton>
+                                                    <s.SpacerMedium />
+                                                    <s.TextDescription
+                                                        style={{
+                                                            textAlign: "center",
+                                                            color: "var(--accent-text)",
+                                                        }}
+                                                    >
+                                                        {mintAmount}
+                                                    </s.TextDescription>
+                                                    <s.SpacerMedium />
+                                                    <StyledRoundButton
+                                                        disabled={claimingNft ? 1 : 0}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            incrementMintAmount();
+                                                        }}
+                                                    >
+                                                        +
+                                                    </StyledRoundButton>
+                                                </s.Container>
+                                                <s.SpacerSmall />
+                                                <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                                                    <StyledButton
+                                                        disabled={claimingNft ? 1 : 0}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            claimNFTs();
+                                                            getData();
+                                                        }}
+                                                    >
+                                                        {claimingNft ? "BUSY" : "BUY"}
+                                                    </StyledButton>
+                                                </s.Container> */}
+
+                                        <s.SpacerMedium />
+                                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
                                         <s.TextDescription
+                                                    style={{
+                                                        textAlign: "center",
+                                                        color: "var(--accent-text)",
+                                                    }}
+                                                >
+                                                    Congratulation You're Whitelisted , Please Wait For Mint Day
+                                                </s.TextDescription>
+                                        </s.Container>
+                                        <s.SpacerSmall />
+                                            </>
+                                        ) :
+                                        <>
+                                        {/* <s.TextDescription
                                             style={{
                                                 textAlign: "center",
                                                 color: "var(--accent-text)",
                                             }}
                                         >
                                             {feedback}
-                                        </s.TextDescription>
+                                        </s.TextDescription> */}
                                         <s.SpacerMedium />
                                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                                            <StyledRoundButton
-                                                style={{ lineHeight: 0.4 }}
-                                                disabled={claimingNft ? 1 : 0}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    decrementMintAmount();
-                                                }}
-                                            >
-                                                -
-                                            </StyledRoundButton>
-                                            <s.SpacerMedium />
-                                            <s.TextDescription
-                                                style={{
-                                                    textAlign: "center",
-                                                    color: "var(--accent-text)",
-                                                }}
-                                            >
-                                                {mintAmount}
-                                            </s.TextDescription>
-                                            <s.SpacerMedium />
-                                            <StyledRoundButton
-                                                disabled={claimingNft ? 1 : 0}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    incrementMintAmount();
-                                                }}
-                                            >
-                                                +
-                                            </StyledRoundButton>
+                                        <s.TextDescription
+                                                    style={{
+                                                        textAlign: "center",
+                                                        color: "var(--accent-text)",
+                                                    }}
+                                                >
+                                                    You're Not Whitelisted
+                                                </s.TextDescription>
                                         </s.Container>
                                         <s.SpacerSmall />
-                                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                                            <StyledButton
-                                                disabled={claimingNft ? 1 : 0}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    claimNFTs();
-                                                    getData();
-                                                }}
-                                            >
-                                                {claimingNft ? "BUSY" : "BUY"}
-                                            </StyledButton>
-                                        </s.Container>
+                                      
+                                        </>
+                                        }
+                                        
                                     </>
                                 )}
                             </>
@@ -467,7 +535,7 @@ function App() {
                     <s.Container flex={1} jc={"center"} ai={"center"}>
                         <StyledImg
                             alt={"example"}
-                            src={"/config/images/example.gif"}
+                            src={"/config/images/2.png"}
                             style={{ transform: "scaleX(-1)" }}
                         />
                     </s.Container>
