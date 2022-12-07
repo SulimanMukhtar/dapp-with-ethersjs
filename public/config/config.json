@@ -1,13 +1,12 @@
 {
-  "CONTRACT_ADDRESS": "",
+  "CONTRACT_ADDRESS": "0x9c23AaBDf3d234bb428573BF2cD9b3110a5514D2",
   "NETWORK": {
-    "NAME": "Ethereum",
+    "NAME": "Goerli test network",
     "SYMBOL": "ETH",
-    "ID": 1
+    "ID": 5
   },
-  "NFT_NAME": "The Badass Bears NFT",
-  "SYMBOL": "Badass",
-  "MARKETPLACE": "Opensea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/",
+  "NFT_NAME": "NFT Name",
+  "SYMBOL": "SYM",
+
   "SHOW_BACKGROUND": true
 }

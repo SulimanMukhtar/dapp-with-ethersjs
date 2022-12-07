@@ -157,7 +157,7 @@ function App() {
                 console.log(Res)
                 console.log()
                 setFeedback(
-                    `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+                    `WOW, the ${CONFIG.NFT_NAME} is yours!`
                 );
                 setClaimingNft(false);
             } catch (error) {
@@ -280,25 +280,25 @@ function App() {
                 style={{ padding: 24, backgroundColor: "var(--primary)" }}
                 image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
             >
-                <a href={CONFIG.MARKETPLACE_LINK}>
+                {/* <a href={CONFIG.MARKETPLACE_LINK}>
                     <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-                </a>
+                </a> */}
                 <s.SpacerSmall />
 
                 <s.TextDescription
                             style={{
-                                fontSize: '30px',
+                                fontSize: '20px',
                                 textAlign: "center",
                                 color: "var(--primary-text)",
                             }}
                         >
-                           Badass Bears
+                           NFT Dapp connects you with the NFT contract to mint some NFTs
                         </s.TextDescription> 
 
                 <s.SpacerSmall />
                 <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
                     <s.Container flex={1} jc={"center"} ai={"center"}>
-                        <StyledImg alt={"example"} src={"/config/images/1.png"} />
+                        {/* <StyledImg alt={"example"} src={"/config/images/1.png"} /> */}
                     </s.Container>
                     <s.SpacerLarge />
                     <s.Container
@@ -430,9 +430,9 @@ function App() {
                                     </s.Container>
                                 ) : (
                                     <>
-                                        {isWhitelisted() == true ? (
+
                                             <>
-                                                    {/* <s.TextDescription
+                                                    <s.TextDescription
                                                     style={{
                                                         textAlign: "center",
                                                         color: "var(--accent-text)",
@@ -484,46 +484,21 @@ function App() {
                                                     >
                                                         {claimingNft ? "BUSY" : "BUY"}
                                                     </StyledButton>
-                                                </s.Container> */}
+                                                </s.Container>
 
                                         <s.SpacerMedium />
-                                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                                        <s.TextDescription
-                                                    style={{
-                                                        textAlign: "center",
-                                                        color: "var(--accent-text)",
-                                                    }}
-                                                >
-                                                    Congratulation You're Whitelisted , Please Wait For Mint Day
-                                                </s.TextDescription>
-                                        </s.Container>
+                                     
                                         <s.SpacerSmall />
                                             </>
-                                        ) :
+
                                         <>
-                                        {/* <s.TextDescription
-                                            style={{
-                                                textAlign: "center",
-                                                color: "var(--accent-text)",
-                                            }}
-                                        >
-                                            {feedback}
-                                        </s.TextDescription> */}
+                                       
                                         <s.SpacerMedium />
-                                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                                        <s.TextDescription
-                                                    style={{
-                                                        textAlign: "center",
-                                                        color: "var(--accent-text)",
-                                                    }}
-                                                >
-                                                    You're Not Whitelisted
-                                                </s.TextDescription>
-                                        </s.Container>
+                                       
                                         <s.SpacerSmall />
                                       
                                         </>
-                                        }
+                                        
                                         
                                     </>
                                 )}
@@ -533,37 +508,15 @@ function App() {
                     </s.Container>
                     <s.SpacerLarge />
                     <s.Container flex={1} jc={"center"} ai={"center"}>
-                        <StyledImg
+                        {/* <StyledImg
                             alt={"example"}
                             src={"/config/images/2.png"}
                             style={{ transform: "scaleX(-1)" }}
-                        />
+                        /> */}
                     </s.Container>
                 </ResponsiveWrapper>
                 <s.SpacerMedium />
-                <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-                    <s.TextDescription
-                        style={{
-                            textAlign: "center",
-                            color: "var(--primary-text)",
-                        }}
-                    >
-                        Please make sure you are connected to the right network (
-                        {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-                        Once you make the purchase, you cannot undo this action.
-                    </s.TextDescription>
-                    <s.SpacerSmall />
-                    <s.TextDescription
-                        style={{
-                            textAlign: "center",
-                            color: "var(--primary-text)",
-                        }}
-                    >
-                        We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-                        successfully mint your NFT. We recommend that you don't lower the
-                        gas limit.
-                    </s.TextDescription>
-                </s.Container>
+                
             </s.Container>
         </s.Screen>
     );
